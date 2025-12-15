@@ -40,7 +40,9 @@ const experienced: Tech[] = [
   { name: 'OpenFeign', icon: 'mdi:network-outline' },
   { name: 'Tailwind CSS', icon: 'mdi:tailwind' },
   { name: 'K6', icon: 'mdi:speedometer' },
-  { name: 'Postman', icon: 'mdi:send' }
+  { name: 'Postman', icon: 'mdi:send' },
+  { name: 'JSP', icon: 'mdi:language-java' },
+  { name: 'Thymeleaf', icon: 'simple-icons:thymeleaf' }
 ]
 
 const values: Tech[] = [
@@ -245,7 +247,7 @@ const values: Tech[] = [
             rel="noopener noreferrer"
             class="flex items-center gap-2 px-6 py-3 bg-slate-950 border border-white/20 rounded-xl hover:border-white/50 hover:shadow-lg hover:shadow-white/10 transition-all duration-300 text-slate-300 hover:text-white group"
           >
-            <iconify-icon icon="mdi:briefcase-document" width="20" class="group-hover:text-white"></iconify-icon>
+            <iconify-icon icon="mdi:briefcase" width="20" class="group-hover:text-white"></iconify-icon>
             <span class="font-semibold">Portfolio</span>
           </a>
         </div>

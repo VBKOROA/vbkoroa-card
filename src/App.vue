@@ -61,7 +61,7 @@ const values: Tech[] = [
 <template>
   <div class="min-h-screen bg-gradient-to-br from-black via-slate-900 to-black flex items-center justify-center p-4">
     <!-- Main Card Container -->
-    <div class="w-full max-w-4xl">
+    <div class="w-full max-w-4xl my-4">
       <!-- Hero Card -->
       <div class="bg-gradient-to-br from-slate-950 to-black rounded-2xl border border-white/20 shadow-2xl overflow-hidden mb-8">
         <!-- Header Gradient -->
@@ -80,14 +80,14 @@ const values: Tech[] = [
             <div class="flex items-end gap-6">
               <!-- Avatar Circle with Image -->
               <div class="w-24 h-24 rounded-full bg-white flex items-center justify-center shadow-lg -mt-16 overflow-hidden border-4 border-black">
-                <img :src="profileImg" alt="Profile" class="w-full h-full object-cover" />
+                <img :src="profileImg" alt="프로필" class="w-full h-full object-cover" />
               </div>
               <!-- Name and Title -->
               <div>
                 <h1 class="text-4xl font-black text-white mb-2">
                   VBKOROA
                 </h1>
-                <p class="text-cyan-300 text-lg font-semibold">Backend Developer</p>
+                <p class="text-cyan-300 text-lg font-semibold">백엔드 개발자</p>
               </div>
             </div>
             <!-- Contact Links -->
@@ -97,7 +97,7 @@ const values: Tech[] = [
                 class="flex flex-col items-center gap-1 px-3 py-2 bg-slate-900/50 border border-white/20 rounded-xl hover:border-white/50 hover:bg-white/10 hover:shadow-lg hover:shadow-white/10 transition-all duration-300 text-slate-300 hover:text-white group"
               >
                 <iconify-icon icon="mdi:email" width="24" class="group-hover:scale-110 transition-transform"></iconify-icon>
-                <span class="text-xs font-semibold">Email</span>
+                <span class="text-xs font-semibold">이메일</span>
               </a>
               <a 
                 href="https://www.notion.so/2b19541fdc3080bd90b7f835e1d185cb?source=copy_link"
@@ -106,14 +106,14 @@ const values: Tech[] = [
                 class="flex flex-col items-center gap-1 px-3 py-2 bg-slate-900/50 border border-white/20 rounded-xl hover:border-white/50 hover:bg-white/10 hover:shadow-lg hover:shadow-white/10 transition-all duration-300 text-slate-300 hover:text-white group"
               >
                 <iconify-icon icon="mdi:briefcase" width="24" class="group-hover:scale-110 transition-transform"></iconify-icon>
-                <span class="text-xs font-semibold">Portfolio</span>
+                <span class="text-xs font-semibold">포트폴리오</span>
               </a>
             </div>
           </div>
 
           <!-- Description -->
           <p class="text-slate-300 text-center max-w-2xl mx-auto mb-8 leading-relaxed">
-            Passionate about building robust, scalable applications with exceptional user experience and developer experience. Crafting code that stands the test of time.
+            사용자와 개발자가 모두 즐거운, 견고하고 확장 가능한 서비스를 만듭니다. 시간이 지나도 가치가 남는 코드를 추구합니다.
           </p>
 
           <!-- Tab Navigation -->
@@ -128,7 +128,7 @@ const values: Tech[] = [
               ]"
             >
               <iconify-icon icon="mdi:fire" class="inline mr-2"></iconify-icon>
-              Frequently Used
+              주로 쓰는
             </button>
             <button
               @click="activeTab = 'favorites'"
@@ -140,7 +140,7 @@ const values: Tech[] = [
               ]"
             >
               <iconify-icon icon="mdi:heart" class="inline mr-2"></iconify-icon>
-              Favorites
+              애정하는
             </button>
             <button
               @click="activeTab = 'experienced'"
@@ -152,7 +152,7 @@ const values: Tech[] = [
               ]"
             >
               <iconify-icon icon="mdi:briefcase" class="inline mr-2"></iconify-icon>
-              Experienced
+              경험 있음
             </button>
             <button
               @click="activeTab = 'values'"
@@ -164,7 +164,7 @@ const values: Tech[] = [
               ]"
             >
               <iconify-icon icon="mdi:star" class="inline mr-2"></iconify-icon>
-              Core Values
+              핵심 가치
             </button>
           </div>
 
@@ -235,25 +235,25 @@ const values: Tech[] = [
           <p class="text-2xl font-black text-white">
             {{ frequentlyUsed.length }}
           </p>
-          <p class="text-slate-400 text-xs mt-1 font-semibold">PREFERRED</p>
+          <p class="text-slate-400 text-xs mt-1 font-semibold">주력 스택</p>
         </div>
         <div class="bg-slate-950 border border-white/20 rounded-xl p-4 text-center">
           <p class="text-2xl font-black text-white">
             {{ favorites.length }}
           </p>
-          <p class="text-slate-400 text-xs mt-1 font-semibold">FAVORITES</p>
+          <p class="text-slate-400 text-xs mt-1 font-semibold">애정 스택</p>
         </div>
         <div class="bg-slate-950 border border-white/20 rounded-xl p-4 text-center">
           <p class="text-2xl font-black text-white">
             {{ experienced.length }}
           </p>
-          <p class="text-slate-400 text-xs mt-1 font-semibold">EXPERIENCED</p>
+          <p class="text-slate-400 text-xs mt-1 font-semibold">경험 스택</p>
         </div>
         <div class="bg-slate-950 border border-white/20 rounded-xl p-4 text-center">
           <p class="text-2xl font-black text-white">
             {{ values.length }}
           </p>
-          <p class="text-slate-400 text-xs mt-1 font-semibold">VALUES</p>
+          <p class="text-slate-400 text-xs mt-1 font-semibold">핵심 가치</p>
         </div>
       </div>
     </div>

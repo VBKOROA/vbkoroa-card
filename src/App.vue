@@ -145,7 +145,7 @@ const values: Tech[] = [
               ]"
             >
               <iconify-icon icon="mdi:fire" class="inline mr-2"></iconify-icon>
-              주로 쓰는
+              주력
             </button>
             <button
               @click="activeTab = 'favorites'"
@@ -157,7 +157,7 @@ const values: Tech[] = [
               ]"
             >
               <iconify-icon icon="mdi:heart" class="inline mr-2"></iconify-icon>
-              애정하는
+              선호
             </button>
             <button
               @click="activeTab = 'experienced'"
@@ -168,8 +168,8 @@ const values: Tech[] = [
                   : 'bg-slate-800/50 text-slate-300 border border-white/20 hover:bg-slate-700/50'
               ]"
             >
-              <iconify-icon icon="mdi:briefcase" class="inline mr-2"></iconify-icon>
-              경험 있는
+              <iconify-icon icon="mdi:puzzle" class="inline mr-2"></iconify-icon>
+              경험
             </button>
             <button
               @click="activeTab = 'values'"
@@ -181,7 +181,7 @@ const values: Tech[] = [
               ]"
             >
               <iconify-icon icon="mdi:star" class="inline mr-2"></iconify-icon>
-              핵심 가치
+              가치
             </button>
           </div>
 

@@ -77,9 +77,9 @@ const values: Tech[] = [
         <!-- Profile Content -->
         <div class="px-4 sm:px-8 py-6 sm:py-12 relative z-10">
           <div class="flex flex-col sm:flex-row items-start justify-between gap-4 sm:gap-6 mb-6 sm:mb-8">
-            <div class="flex items-end gap-3 sm:gap-6 w-full sm:w-auto">
+            <div class="flex items-center gap-4 sm:gap-6 w-full sm:w-auto">
               <!-- Avatar Circle with Image -->
-              <div class="w-20 sm:w-24 h-20 sm:h-24 rounded-full bg-white flex items-center justify-center shadow-lg -mt-10 sm:-mt-16 overflow-hidden border-4 border-black flex-shrink-0">
+              <div class="w-20 sm:w-24 h-20 sm:h-24 rounded-full bg-white flex items-center justify-center shadow-lg -mt-8 sm:-mt-12 overflow-hidden border-4 border-black flex-shrink-0">
                 <img :src="profileImg" alt="프로필" class="w-full h-full object-cover" />
               </div>
               <!-- Name and Title -->

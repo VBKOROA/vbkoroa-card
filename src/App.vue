@@ -28,6 +28,8 @@ const favorites: Tech[] = [
 ]
 
 const experienced: Tech[] = [
+  { name: 'TypeScript', icon: 'devicon:typescript' },
+  { name: 'NestJS', icon: 'devicon:nestjs' },
   { name: 'Python', icon: 'material-icon-theme:python' },
   { name: 'FastAPI', icon: 'devicon:fastapi' },
   { name: 'Vue.js', icon: 'devicon:vuejs' },

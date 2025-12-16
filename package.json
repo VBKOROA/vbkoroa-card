@@ -15,7 +15,7 @@
     "deploy": "gh-pages -d dist"
   },
   "dependencies": {
-    "iconify-icon": "^1.0.8",
+    "iconify-icon": "^3.0.2",
     "vue": "^3.5.25"
   },
   "devDependencies": {

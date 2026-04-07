@@ -1,13 +1,15 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 import profileImg from '@/assets/images/profile.png'
+import portfolioPdf from '@/assets/portfolio.pdf'
 
-const activeTab = ref<'frequently' | 'favorites' | 'experienced' | 'values'>('frequently')
+type TabId = 'frequently' | 'favorites' | 'experienced' | 'values'
+
+const activeTab = ref<TabId>('frequently')
 
 interface Tech {
   name: string
   icon: string
-  category?: string
 }
 
 const frequentlyUsed: Tech[] = [
@@ -56,223 +58,121 @@ const values: Tech[] = [
   { name: 'Stability', icon: 'mdi:shield-check' },
   { name: 'DX', icon: 'mdi:heart-multiple' }
 ]
+
+const tabs: { id: TabId; label: string; icon: string }[] = [
+  { id: 'frequently', label: '주력', icon: 'mdi:fire' },
+  { id: 'favorites', label: '선호', icon: 'mdi:heart' },
+  { id: 'experienced', label: '경험', icon: 'mdi:puzzle' },
+  { id: 'values', label: '가치', icon: 'mdi:star' }
+]
+
+const stacksByTab: Record<TabId, Tech[]> = {
+  frequently: frequentlyUsed,
+  favorites,
+  experienced,
+  values
+}
+
+const currentStacks = computed(() => stacksByTab[activeTab.value])
+
+const stats = [
+  { label: '주력 스택', value: frequentlyUsed.length },
+  { label: '애정 스택', value: favorites.length },
+  { label: '경험 스택', value: experienced.length },
+  { label: '핵심 가치', value: values.length }
+]
 </script>
 
 <template>
-  <div class="min-h-screen bg-gradient-to-br from-black via-slate-900 to-black flex items-center justify-center p-4">
-    <!-- Main Card Container -->
-    <div class="w-full max-w-4xl my-4">
-      <!-- Hero Card -->
-      <div class="bg-gradient-to-br from-slate-950 to-black rounded-2xl border border-white/20 shadow-2xl overflow-hidden mb-8">
-        <!-- Header Gradient -->
-        <div class="h-20 sm:h-32 bg-gradient-to-r from-slate-900 via-black to-slate-900 relative overflow-hidden border-b border-white/10">
-          <div class="absolute inset-0">
-            <!-- Animated blur elements -->
-            <div class="absolute w-96 h-96 bg-gradient-to-br from-white to-slate-400 rounded-full -top-40 -left-32 blur-3xl opacity-30 animate-pulse"></div>
-            <div class="absolute w-80 h-80 bg-gradient-to-tl from-slate-300 to-white rounded-full -bottom-40 -right-40 blur-3xl opacity-25 animate-pulse animation-delay-1000"></div>
-            <div class="absolute w-72 h-72 bg-slate-200 rounded-full top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 blur-2xl opacity-15"></div>
+  <div class="min-h-screen bg-[#f3e9dc] p-6 text-[#5e3023] font-sans">
+    <div class="mx-auto max-w-6xl w-full grid gap-8 lg:grid-cols-[340px_1fr] lg:items-start">
+      
+      <!-- Left Sidebar -->
+      <aside class="flex flex-col gap-6">
+        <!-- Profile Card -->
+        <div class="rounded-3xl border-2 border-[#c08552]/30 bg-white/60 backdrop-blur-md p-8 shadow-xl">
+          <div class="mb-6 flex justify-between items-start">
+            <span class="inline-flex items-center gap-2 rounded-full border border-[#c08552] bg-[#c08552]/10 px-3 py-1 text-xs font-bold text-[#c08552]">
+              <span class="h-2 w-2 rounded-full bg-[#c08552] animate-pulse"></span>
+              OPEN TO WORK
+            </span>
+          </div>
+
+          <div class="mb-6 text-center">
+            <img :src="profileImg" alt="Profile" class="mx-auto h-32 w-32 rounded-3xl object-cover border-4 border-[#f3e9dc] shadow-lg mb-4" />
+            <h1 class="text-3xl font-extrabold text-[#5e3023]">VBKOROA</h1>
+            <p class="mt-2 text-sm font-semibold tracking-widest text-[#c08552] uppercase">Backend Engineer</p>
+          </div>
+
+          <div class="w-12 h-1 bg-[#c08552] mx-auto rounded-full mb-6"></div>
+
+          <p class="mb-8 text-center text-sm leading-relaxed text-[#5e3023]/80">
+            사용자와 개발자가 동시에 만족할 수 있는, 안정적이고 확장 가능한 서비스를 만듭니다.
+          </p>
+
+          <div class="flex flex-col gap-3">
+            <a href="mailto:yoojs0254@kakao.com" class="group flex items-center justify-between rounded-xl bg-[#c08552] px-4 py-3 text-white transition-all hover:bg-[#5e3023] shadow-md hover:shadow-lg">
+              <span class="flex items-center gap-3 font-medium">
+                <iconify-icon icon="mdi:email" width="20"></iconify-icon> Email
+              </span>
+              <iconify-icon icon="mdi:arrow-right" class="transition-transform group-hover:translate-x-1"></iconify-icon>
+            </a>
+            <a :href="portfolioPdf" target="_blank" class="group flex items-center justify-between rounded-xl border border-[#c08552] bg-white px-4 py-3 text-[#c08552] transition-all hover:bg-[#c08552] hover:text-white shadow-sm">
+              <span class="flex items-center gap-3 font-medium">
+                <iconify-icon icon="mdi:briefcase" width="20"></iconify-icon> Portfolio
+              </span>
+              <iconify-icon icon="mdi:arrow-top-right" class="transition-transform group-hover:translate-x-1 group-hover:-translate-y-1"></iconify-icon>
+            </a>
           </div>
         </div>
 
-        <!-- Profile Content -->
-        <div class="px-4 sm:px-8 py-6 sm:py-12 relative z-10">
-          <div class="flex flex-col sm:flex-row items-start justify-between gap-4 sm:gap-6 mb-6 sm:mb-8">
-            <div class="flex items-center gap-4 sm:gap-6 w-full sm:w-auto">
-              <!-- Avatar Circle with Image -->
-              <div class="w-20 sm:w-24 h-20 sm:h-24 rounded-full bg-white flex items-center justify-center shadow-lg -mt-8 sm:-mt-12 overflow-hidden border-4 border-black flex-shrink-0">
-                <img :src="profileImg" alt="프로필" class="w-full h-full object-cover" />
-              </div>
-              <!-- Name and Title -->
-              <div class="flex-1">
-                <h1 class="text-2xl sm:text-4xl font-black text-white mb-1 sm:mb-2">
-                  VBKOROA
-                </h1>
-                <p class="text-cyan-300 text-sm sm:text-lg font-semibold">백엔드 개발자</p>
-              </div>
-              <!-- Contact Links (모바일에서만 표시) -->
-              <div class="flex gap-2 sm:hidden items-start">
-                <a 
-                  href="mailto:yoojs0254@kakao.com"
-                  class="flex flex-col items-center gap-0.5 px-2 py-1.5 bg-slate-900/50 border border-white/20 rounded-lg hover:border-white/50 hover:bg-white/10 hover:shadow-lg hover:shadow-white/10 transition-all duration-300 text-slate-300 hover:text-white group"
-                >
-                  <iconify-icon icon="mdi:email" width="20" class="group-hover:scale-110 transition-transform"></iconify-icon>
-                </a>
-                <a 
-                  href="https://www.notion.so/2b19541fdc3080bd90b7f835e1d185cb?source=copy_link"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="flex flex-col items-center gap-0.5 px-2 py-1.5 bg-slate-900/50 border border-white/20 rounded-lg hover:border-white/50 hover:bg-white/10 hover:shadow-lg hover:shadow-white/10 transition-all duration-300 text-slate-300 hover:text-white group"
-                >
-                  <iconify-icon icon="mdi:briefcase" width="20" class="group-hover:scale-110 transition-transform"></iconify-icon>
-                </a>
-              </div>
-            </div>
-            <!-- Contact Links (태블릿 이상에서는 우측) -->
-            <div class="hidden sm:flex gap-3 items-start">
-              <a 
-                href="mailto:yoojs0254@kakao.com"
-                class="flex flex-col items-center gap-0.5 px-3 py-2 bg-slate-900/50 border border-white/20 rounded-xl hover:border-white/50 hover:bg-white/10 hover:shadow-lg hover:shadow-white/10 transition-all duration-300 text-slate-300 hover:text-white group"
-              >
-                <iconify-icon icon="mdi:email" width="24" class="group-hover:scale-110 transition-transform"></iconify-icon>
-                <span class="text-xs font-semibold">이메일</span>
-              </a>
-              <a 
-                href="https://www.notion.so/2b19541fdc3080bd90b7f835e1d185cb?source=copy_link"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="flex flex-col items-center gap-0.5 px-3 py-2 bg-slate-900/50 border border-white/20 rounded-xl hover:border-white/50 hover:bg-white/10 hover:shadow-lg hover:shadow-white/10 transition-all duration-300 text-slate-300 hover:text-white group"
-              >
-                <iconify-icon icon="mdi:briefcase" width="24" class="group-hover:scale-110 transition-transform"></iconify-icon>
-                <span class="text-xs font-semibold">포트폴리오</span>
-              </a>
-            </div>
-          </div>
-
-          <!-- Description -->
-          <p class="text-slate-300 text-center text-sm sm:text-base max-w-2xl mx-auto mb-6 sm:mb-8 leading-relaxed">
-            사용자와 개발자가 모두 즐거운, 견고하고 확장 가능한 서비스를 만듭니다. 시간이 지나도 가치가 남는 코드를 추구합니다.
-          </p>
-
-          <!-- Tab Navigation -->
-          <div class="flex flex-wrap gap-2 justify-center mb-6 sm:mb-8">
-            <button
-              @click="activeTab = 'frequently'"
-              :class="[
-                'px-2 sm:px-4 py-1.5 sm:py-2 rounded-lg font-semibold transition-all duration-300 text-xs sm:text-sm',
-                activeTab === 'frequently'
-                  ? 'bg-white text-black shadow-lg'
-                  : 'bg-slate-800/50 text-slate-300 border border-white/20 hover:bg-slate-700/50'
-              ]"
-            >
-              <iconify-icon icon="mdi:fire" class="inline mr-2"></iconify-icon>
-              주력
-            </button>
-            <button
-              @click="activeTab = 'favorites'"
-              :class="[
-                'px-2 sm:px-4 py-1.5 sm:py-2 rounded-lg font-semibold transition-all duration-300 text-xs sm:text-sm',
-                activeTab === 'favorites'
-                  ? 'bg-white text-black shadow-lg'
-                  : 'bg-slate-800/50 text-slate-300 border border-white/20 hover:bg-slate-700/50'
-              ]"
-            >
-              <iconify-icon icon="mdi:heart" class="inline mr-2"></iconify-icon>
-              선호
-            </button>
-            <button
-              @click="activeTab = 'experienced'"
-              :class="[
-                'px-2 sm:px-4 py-1.5 sm:py-2 rounded-lg font-semibold transition-all duration-300 text-xs sm:text-sm',
-                activeTab === 'experienced'
-                  ? 'bg-white text-black shadow-lg'
-                  : 'bg-slate-800/50 text-slate-300 border border-white/20 hover:bg-slate-700/50'
-              ]"
-            >
-              <iconify-icon icon="mdi:puzzle" class="inline mr-2"></iconify-icon>
-              경험
-            </button>
-            <button
-              @click="activeTab = 'values'"
-              :class="[
-                'px-2 sm:px-4 py-1.5 sm:py-2 rounded-lg font-semibold transition-all duration-300 text-xs sm:text-sm',
-                activeTab === 'values'
-                  ? 'bg-white text-black shadow-lg'
-                  : 'bg-slate-800/50 text-slate-300 border border-white/20 hover:bg-slate-700/50'
-              ]"
-            >
-              <iconify-icon icon="mdi:star" class="inline mr-2"></iconify-icon>
-              가치
-            </button>
-          </div>
-
-          <!-- Tech Stack Display -->
-          <div class="transition-all duration-500">
-            <div v-if="activeTab === 'frequently'" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-4">
-              <div
-                v-for="(tech, index) in frequentlyUsed"
-                :key="tech.name"
-                :style="{ animationDelay: `${index * 0.08}s` }"
-                class="group bg-slate-900/50 border border-white/20 rounded-lg sm:rounded-xl p-3 sm:p-4 hover:border-white/50 hover:shadow-lg hover:shadow-white/10 transition-all duration-300 cursor-pointer transform hover:scale-105 animate-card-in"
-              >
-                <div class="flex flex-col items-center gap-2 sm:gap-3">
-                  <iconify-icon :icon="tech.icon" width="28" class="sm:w-8 text-slate-300 group-hover:text-white transition-colors"></iconify-icon>
-                  <p class="text-slate-200 font-semibold text-center text-xs sm:text-sm">{{ tech.name }}</p>
-                </div>
-              </div>
-            </div>
-
-            <div v-else-if="activeTab === 'favorites'" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-4">
-              <div
-                v-for="(tech, index) in favorites"
-                :key="tech.name"
-                :style="{ animationDelay: `${index * 0.08}s` }"
-                class="group bg-slate-900/50 border border-white/20 rounded-lg sm:rounded-xl p-3 sm:p-4 hover:border-white/50 hover:shadow-lg hover:shadow-white/10 transition-all duration-300 cursor-pointer transform hover:scale-105 animate-card-in"
-              >
-                <div class="flex flex-col items-center gap-2 sm:gap-3">
-                  <iconify-icon :icon="tech.icon" width="28" class="sm:w-8 text-slate-300 group-hover:text-white transition-colors"></iconify-icon>
-                  <p class="text-slate-200 font-semibold text-center text-xs sm:text-sm">{{ tech.name }}</p>
-                </div>
-              </div>
-            </div>
-
-            <div v-else-if="activeTab === 'experienced'" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-4">
-              <div
-                v-for="(tech, index) in experienced"
-                :key="tech.name"
-                :style="{ animationDelay: `${index * 0.08}s` }"
-                class="group bg-slate-900/50 border border-white/20 rounded-lg sm:rounded-xl p-3 sm:p-4 hover:border-white/50 hover:shadow-lg hover:shadow-white/10 transition-all duration-300 cursor-pointer transform hover:scale-105 animate-card-in"
-              >
-                <div class="flex flex-col items-center gap-2 sm:gap-3">
-                  <iconify-icon :icon="tech.icon" width="28" class="sm:w-8 text-slate-300 group-hover:text-white transition-colors"></iconify-icon>
-                  <p class="text-slate-200 font-semibold text-center text-xs sm:text-sm">{{ tech.name }}</p>
-                </div>
-              </div>
-            </div>
-
-            <div v-else-if="activeTab === 'values'" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-4">
-              <div
-                v-for="(value, index) in values"
-                :key="value.name"
-                :style="{ animationDelay: `${index * 0.08}s` }"
-                class="group bg-slate-900/50 border border-white/20 rounded-lg sm:rounded-xl p-3 sm:p-4 hover:border-white/50 hover:shadow-lg hover:shadow-white/10 transition-all duration-300 cursor-pointer transform hover:scale-105 animate-card-in"
-              >
-                <div class="flex flex-col items-center gap-2 sm:gap-3">
-                  <iconify-icon :icon="value.icon" width="28" class="sm:w-8 text-slate-300 group-hover:text-white transition-colors"></iconify-icon>
-                  <p class="text-slate-200 font-semibold text-center text-xs sm:text-sm">{{ value.name }}</p>
-                </div>
-              </div>
-            </div>
+        <!-- Stats Card -->
+        <div class="grid grid-cols-2 gap-4">
+          <div v-for="stat in stats" :key="stat.label" class="flex flex-col items-center justify-center rounded-3xl border-2 border-[#c08552]/40 bg-white p-5 text-center shadow-md transition-transform hover:-translate-y-1">
+            <p class="text-3xl font-black text-[#5e3023]">{{ stat.value }}</p>
+            <p class="mt-2 text-xs font-bold text-[#c08552] uppercase tracking-wide">{{ stat.label }}</p>
           </div>
         </div>
-      </div>
+      </aside>
 
-      <!-- Footer Stats -->
-      <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-4">
-        <div class="bg-slate-950 border border-white/20 rounded-lg sm:rounded-xl p-3 sm:p-4 text-center">
-          <p class="text-lg sm:text-2xl font-black text-white">
-            {{ frequentlyUsed.length }}
-          </p>
-          <p class="text-slate-400 text-xs mt-1 sm:mt-2 font-semibold">주력 스택</p>
+      <!-- Main Content -->
+      <main class="rounded-3xl border-2 border-[#5e3023]/10 bg-white/60 backdrop-blur-md p-8 shadow-xl flex flex-col lg:sticky lg:top-6 lg:max-h-[calc(100vh-3rem)] overflow-y-auto overflow-x-hidden">
+        <div class="mb-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between shrink-0">
+          <h2 class="text-2xl font-extrabold text-[#5e3023] flex items-center gap-2">
+            <iconify-icon icon="mdi:code-braces" class="text-[#c08552]"></iconify-icon>
+            Tech Stack
+          </h2>
+          
+          <div class="w-full sm:w-auto flex gap-1 sm:gap-2 p-1 sm:p-1.5 rounded-2xl bg-[#f3e9dc] border border-[#5e3023]/10 shadow-inner overflow-x-auto">
+            <button
+              v-for="tab in tabs" :key="tab.id" @click="activeTab = tab.id"
+              :class="[
+                'flex-1 sm:flex-none flex items-center justify-center gap-1.5 px-2 py-2.5 sm:px-4 sm:py-2 rounded-xl text-[11px] sm:text-sm font-bold transition-all duration-300 whitespace-nowrap',
+                activeTab === tab.id
+                  ? 'bg-[#5e3023] text-white shadow-md transform sm:scale-105'
+                  : 'text-[#5e3023]/60 hover:text-[#5e3023] hover:bg-white'
+              ]"
+            >
+              <iconify-icon :icon="tab.icon" width="16"></iconify-icon>
+              {{ tab.label }}
+            </button>
+          </div>
         </div>
-        <div class="bg-slate-950 border border-white/20 rounded-lg sm:rounded-xl p-3 sm:p-4 text-center">
-          <p class="text-lg sm:text-2xl font-black text-white">
-            {{ favorites.length }}
-          </p>
-          <p class="text-slate-400 text-xs mt-1 sm:mt-2 font-semibold">애정 스택</p>
+
+        <div class="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4 content-start">
+          <article
+            v-for="(item, index) in currentStacks" :key="item.name"
+            class="group flex flex-col items-center justify-center p-6 rounded-2xl border-2 border-transparent bg-white shadow-sm transition-all duration-300 hover:border-[#c08552] hover:shadow-lg hover:-translate-y-1 cursor-pointer animate-card-in"
+            :style="{ animationDelay: `${index * 0.05}s` }"
+          >
+            <div class="mb-4 flex items-center justify-center text-4xl text-[#5e3023] transition-transform group-hover:scale-110 group-hover:text-[#c08552]">
+              <iconify-icon :icon="item.icon" width="40" height="40"></iconify-icon>
+            </div>
+            <p class="text-sm font-bold text-[#5e3023] group-hover:text-[#c08552] text-center w-full truncate">{{ item.name }}</p>
+          </article>
         </div>
-        <div class="bg-slate-950 border border-white/20 rounded-lg sm:rounded-xl p-3 sm:p-4 text-center">
-          <p class="text-lg sm:text-2xl font-black text-white">
-            {{ experienced.length }}
-          </p>
-          <p class="text-slate-400 text-xs mt-1 sm:mt-2 font-semibold">경험 스택</p>
-        </div>
-        <div class="bg-slate-950 border border-white/20 rounded-lg sm:rounded-xl p-3 sm:p-4 text-center">
-          <p class="text-lg sm:text-2xl font-black text-white">
-            {{ values.length }}
-          </p>
-          <p class="text-slate-400 text-xs mt-1 sm:mt-2 font-semibold">핵심 가치</p>
-        </div>
-      </div>
+      </main>
+      
     </div>
   </div>
 </template>
